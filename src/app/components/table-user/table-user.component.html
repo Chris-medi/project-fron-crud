@@ -1,0 +1,75 @@
+
+
+<div class="main">
+  <h1>Bandeja de Personas</h1>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="first_name">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.first_name}} </td>
+    </ng-container>
+    
+   
+    <ng-container matColumnDef="last_name">
+      <th mat-header-cell *matHeaderCellDef> Apellido </th>
+      <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
+    </ng-container>
+    
+    
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef> Edad </th>
+      <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="identification_number">
+      <th mat-header-cell *matHeaderCellDef> No. Identicación </th>
+      <td mat-cell *matCellDef="let element"> {{element.identification_number}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Correo </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+    <ng-container matColumnDef="opciones">
+      <th mat-header-cell *matHeaderCellDef> Opciones </th>
+      <td mat-cell *matCellDef="let element"> 
+        <button mat-button color="primary" [routerLink]="['/update',element._id]" >Editar</button>
+        <button mat-button color="warn"  (click)="eliminar(element._id)" >Eliminar</button>
+      </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div class="btn-create ">
+    <button routerLink="/newUser" mat-flat-button color="primary">Nuevo</button>
+  </div>
+</div>
+
+<div class="confirmar" *ngIf="showConfirmar">
+  <div class="ctn-confirmar">
+      <h2 class="title-confirmar">¿Deseas eliminar este registro?</h2>
+      <div class="btn-conf">
+        <button mat-stroked-button (click)="question()" color="primary">Aceptar</button>
+        <button mat-stroked-button (click)="showConfirmar=false" color="warn">Cancelar</button>
+      </div>
+  </div>
+</div>
+
+<div class="success" *ngIf="success">
+  <div class="ctn-confirmar">
+      <h2>Operacion exitosa</h2>
+      <span class="material-icons done">
+        done
+        </span>
+  </div>
+</div>
+
+<div class="confirmar" *ngIf="err">
+  <div class="ctn-confirmar">
+      <h2>Error Vuelve a intentalo</h2>
+      <span class="material-icons err">
+        highlight_off
+        </span>
+        
+  </div>
+</div>
